@@ -1,0 +1,38 @@
+const aws = require('aws-sdk');
+
+const config = require('../config');
+
+
+
+
+
+aws.config.update({
+
+  secretAccessKey: config.s3.secret,
+
+  accessKeyId: config.s3.key,
+
+  region: config.s3.region // region of your bucket
+
+});
+
+
+
+const s3 = new aws.S3();
+
+
+
+const upload = (filename, filedata, mimetype) => {
+
+  const params = {
+
+    Bucket: config.s3.bucket,
+
+    Key: filename,
+
+    Body: filedata,
+
+    ContentType: mimetype,
+
+  };
+
